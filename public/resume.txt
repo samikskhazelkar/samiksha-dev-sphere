@@ -1,0 +1,51 @@
+SAMIKSHA SUNIL ZELKAR
+Software Developer | Backend Developer | Data Science & ML Enthusiast
+Nagpur, Maharashtra, India
+Email: samikshazelkar1999@gmail.com | Phone: +91-9067191533
+GitHub: github.com/samikskhazelkar
+LinkedIn: linkedin.com/in/samiksha-zelkar-1235652bb/
+
+PROFILE
+Intermediate-level Python/data science practitioner and backend developer with experience
+building RESTful APIs, working with .NET technologies and PostgreSQL, and developing
+machine-learning solutions. Approximately 6-7 months of professional experience as a
+Software Developer Trainee; currently working as a Tech Operator Executive.
+
+EXPERIENCE
+Tech Operator Executive — Current role
+
+Software Developer Trainee — Promarc Software Pvt. Ltd. (September 2025 - March 2026)
+- Developed backend applications using C# and ASP.NET Core Web API.
+- Worked with .NET Core and .NET Framework.
+- Designed and implemented RESTful APIs.
+- Worked with PostgreSQL databases.
+- Implemented CRUD functionality.
+- Used Postman for API testing and validation.
+- Worked with authentication and authorization.
+- Performed debugging and error handling.
+- Contributed to backend architecture and performance optimization.
+
+SKILLS
+Languages: C#, SQL, Python
+Frameworks: .NET Core, .NET Framework, ASP.NET Core Web API
+Database: PostgreSQL
+Tools: Postman, Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn
+Backend: RESTful API development, backend architecture, CRUD, authentication &
+authorization, error handling, debugging, performance optimization, layered
+architecture, data processing
+Data Science & ML: Data preprocessing, exploratory data analysis, regression models,
+predictive modelling, classification, data mining, data visualization
+
+PROJECTS
+Heart Disease Analysis — Python, Pandas, Scikit-learn, Matplotlib, Seaborn
+Diabetes Prediction Using Machine Learning — Python, NumPy, Pandas, Matplotlib, Seaborn
+Backend API Development — C#, ASP.NET Core Web API, .NET, PostgreSQL, Postman
+
+EDUCATION
+Bachelor of Engineering, Computer Science Engineering
+Dr. Rajendra Gode Institute of Technology & Research, Amravati (2021 - 2024)
+
+ADDITIONAL LEARNING
+Full Stack Data Science & Generative AI
+Introduction to API
+Build ASP.NET Core Web API - Scratch to Finish (.NET 8 API)
