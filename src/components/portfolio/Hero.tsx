@@ -16,10 +16,10 @@ function useTyping() {
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setText(ROLES[0]);
+      setText(ROLES[0]!);
       return;
     }
-    const full = ROLES[i % ROLES.length];
+    const full = ROLES[i % ROLES.length]!;
     const done = !deleting && text === full;
     const empty = deleting && text === "";
     const delay = done ? 1600 : empty ? 200 : deleting ? 35 : 70;
