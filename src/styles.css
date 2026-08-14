@@ -62,7 +62,28 @@
   --glow-primary: 0 0 0 1px oklch(0.62 0.23 300 / 0.25), 0 18px 60px -20px oklch(0.62 0.23 300 / 0.55);
   --gradient-primary: linear-gradient(135deg, oklch(0.62 0.23 300), oklch(0.75 0.17 320));
   --gradient-surface: linear-gradient(160deg, oklch(1 0 0 / 0.06), oklch(1 0 0 / 0.015));
+
+  /* Hero panel palette (reference style) */
+  --hero-panel: oklch(0.48 0.22 285);
+  --hero-panel-2: oklch(0.42 0.21 288);
+  --hero-on-panel: oklch(0.99 0 0);
+  --hero-accent: oklch(0.82 0.16 82);
+  --hero-accent-foreground: oklch(0.22 0.05 285);
+  --hero-ink: oklch(0.22 0.03 285);
 }
+
+@theme inline {
+  --color-hero-panel: var(--hero-panel);
+  --color-hero-on-panel: var(--hero-on-panel);
+  --color-hero-accent: var(--hero-accent);
+  --color-hero-accent-foreground: var(--hero-accent-foreground);
+  --color-hero-ink: var(--hero-ink);
+}
+
+@utility hero-panel {
+  background-image: linear-gradient(135deg, var(--hero-panel), var(--hero-panel-2));
+}
+
 
 @layer base {
   * {
