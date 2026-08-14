@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { ArrowDown, Download, Mail } from "lucide-react";
-import profile from "@/assets/profile.jpg";
+import { ArrowDown, Download, Mail, Github, Linkedin, Sparkles } from "lucide-react";
+import profile from "@/assets/samiksha.png.asset.json";
 
 const ROLES = [
   "Software Developer",
