@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowDown, Download, Mail, Github, Linkedin, Sparkles } from "lucide-react";
+import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
 import profile from "@/assets/samiksha.png.asset.json";
 
 const ROLES = [
@@ -43,114 +43,106 @@ export function Hero() {
   const typed = useTyping();
 
   return (
-    <section id="home" className="relative mx-auto flex min-h-screen max-w-6xl items-center px-5 pb-20 pt-28 sm:px-8">
-      <div className="grid w-full items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="animate-fade-in">
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-primary">
-            <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-70" />
-              <span className="relative inline-flex size-2 rounded-full bg-primary" />
-            </span>
-            Open to opportunities · Nagpur, India
-          </span>
-
-          <h1 className="mt-6 text-4xl font-semibold leading-[1.05] sm:text-6xl">
-            Samiksha Sunil <span className="text-gradient">Zelkar</span>
-          </h1>
-
-          <p className="mt-5 font-mono text-base text-muted-foreground sm:text-lg">
-            <span className="text-foreground">{typed}</span>
-            <span className="caret ml-0.5 text-primary">_</span>
-          </p>
-
-          <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Backend developer building RESTful APIs with C#, ASP.NET Core and PostgreSQL, with growing expertise in
-            Python, data science and machine learning. Around 6–7 months of professional experience as a Software
-            Developer Trainee, currently a Tech Operator Executive.
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-2">
-            {["C# / .NET", "ASP.NET Core", "PostgreSQL", "Python", "Machine Learning"].map((t) => (
-              <span
-                key={t}
-                className="glass rounded-full px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
-              >
-                {t}
-              </span>
+    <section id="home" className="mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-8">
+      <div className="hero-panel animate-fade-in relative overflow-hidden rounded-[2.5rem] px-6 py-12 text-hero-on-panel shadow-[0_40px_120px_-40px_oklch(0.48_0.22_285/0.7)] sm:px-12 sm:py-16">
+        {/* decorative accents */}
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div className="absolute right-[18%] top-16 size-72 rounded-full bg-hero-accent/90 blur-[2px] sm:size-80" />
+          <div className="absolute right-[6%] top-1/2 size-28 rounded-full bg-hero-accent/80" />
+          <div className="absolute -left-16 -top-16 size-64 rounded-full border border-hero-on-panel/15" />
+          <div className="absolute bottom-8 left-10 size-40 rounded-full border border-hero-on-panel/10" />
+          <div className="absolute left-6 top-24 flex flex-col gap-3 sm:left-8">
+            {[0, 1, 2, 3, 4].map((d) => (
+              <span key={d} className="size-1.5 rounded-full bg-hero-on-panel/60" />
             ))}
-          </div>
-
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <a
-              href="#projects"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all hover:shadow-[var(--glow-primary)]"
-            >
-              View My Work <ArrowDown className="size-4 transition-transform group-hover:translate-y-0.5" />
-            </a>
-            <a
-              href="/resume.txt"
-              download="Samiksha-Zelkar-Resume.txt"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/60"
-            >
-              <Download className="size-4" /> Resume
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground"
-            >
-              <Mail className="size-4" /> Contact
-            </a>
-            <div className="ml-1 flex items-center gap-2">
-              <a
-                href="https://github.com/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="GitHub"
-                className="glass flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
-              >
-                <Github className="size-4" />
-              </a>
-              <a
-                href="https://www.linkedin.com/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="LinkedIn"
-                className="glass flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
-              >
-                <Linkedin className="size-4" />
-              </a>
-            </div>
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-sm">
-          <div className="absolute inset-8 rounded-full bg-primary/25 blur-3xl" aria-hidden />
-          <div className="float-slow relative">
-            <div className="glass relative overflow-hidden rounded-[2rem] p-2 shadow-[var(--glow-primary)]">
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 z-10 rounded-[2rem] bg-gradient-to-t from-background/70 via-transparent to-transparent"
-              />
+        <div className="relative grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="pl-4 sm:pl-8">
+            <span className="inline-flex items-center gap-2 rounded-full bg-hero-on-panel/15 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.22em]">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-hero-accent opacity-80" />
+                <span className="relative inline-flex size-2 rounded-full bg-hero-accent" />
+              </span>
+              Open to opportunities · Nagpur, India
+            </span>
+
+            <h1 className="mt-6 text-4xl font-semibold leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
+              Hello, I&apos;m
+              <br />
+              Samiksha Zelkar An
+              <br />
+              <span className="text-hero-accent">Backend Developer</span>
+            </h1>
+
+            <p className="mt-5 font-mono text-sm text-hero-on-panel/80 sm:text-base">
+              {typed}
+              <span className="caret ml-0.5 text-hero-accent">_</span>
+            </p>
+
+            <p className="mt-4 max-w-lg text-sm leading-relaxed text-hero-on-panel/75 sm:text-base">
+              I build RESTful APIs with C#, ASP.NET Core and PostgreSQL, and explore data science and machine learning
+              with Python — turning backend logic and data into products that work.
+            </p>
+
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <a
+                href="#projects"
+                className="group inline-flex items-center gap-2 rounded-full bg-hero-accent px-7 py-3.5 text-sm font-semibold text-hero-accent-foreground transition-transform hover:-translate-y-0.5"
+              >
+                Get Started <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href="/resume.txt"
+                download="Samiksha-Zelkar-Resume.txt"
+                className="inline-flex items-center gap-2 rounded-full border border-hero-on-panel/35 px-6 py-3.5 text-sm font-medium transition-colors hover:bg-hero-on-panel/10"
+              >
+                <Download className="size-4" /> Download CV
+              </a>
+              <div className="flex items-center gap-2">
+                {[
+                  { href: "https://github.com/", label: "GitHub", Icon: Github },
+                  { href: "https://www.linkedin.com/", label: "LinkedIn", Icon: Linkedin },
+                  { href: "#contact", label: "Contact", Icon: Mail },
+                ].map(({ href, label, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    {...(href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+                    aria-label={label}
+                    className="flex size-11 items-center justify-center rounded-full bg-hero-on-panel/15 transition-colors hover:bg-hero-on-panel/25"
+                  >
+                    <Icon className="size-4" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="relative mx-auto w-full max-w-sm">
+            <div className="relative">
               <img
                 src={profile.url}
                 alt="Portrait of Samiksha Sunil Zelkar"
                 width={928}
                 height={1200}
-                className="aspect-[4/5] w-full rounded-[1.6rem] object-cover object-top"
+                className="relative z-10 mx-auto aspect-[4/5] w-full max-w-[22rem] rounded-[2rem] object-cover object-top"
               />
-            </div>
 
-            <div className="glass absolute -bottom-5 -left-4 z-20 flex items-center gap-2 rounded-2xl px-4 py-3 sm:-left-8">
-              <Sparkles className="size-4 text-primary" />
-              <div className="leading-tight">
-                <p className="text-sm font-semibold">6+ months</p>
-                <p className="font-mono text-[11px] text-muted-foreground">professional experience</p>
+              <div className="absolute -left-2 top-8 z-20 flex items-center gap-3 rounded-2xl bg-background/95 px-4 py-3 shadow-lg sm:-left-8">
+                <span className="text-2xl font-semibold text-hero-panel">6+</span>
+                <span className="text-[11px] font-medium leading-tight text-muted-foreground">
+                  Months
+                  <br />
+                  Experience
+                </span>
               </div>
-            </div>
 
-            <div className="glass absolute -right-3 top-8 z-20 rounded-2xl px-4 py-3 sm:-right-6">
-              <p className="text-sm font-semibold text-gradient">Backend</p>
-              <p className="font-mono text-[11px] text-muted-foreground">APIs &amp; Data</p>
+              <div className="absolute -right-1 bottom-10 z-20 rounded-2xl bg-background/95 px-4 py-3 shadow-lg sm:-right-6">
+                <p className="text-sm font-semibold text-foreground">APIs &amp; Data</p>
+                <p className="font-mono text-[11px] text-muted-foreground">C# · .NET · Python</p>
+              </div>
             </div>
           </div>
         </div>
