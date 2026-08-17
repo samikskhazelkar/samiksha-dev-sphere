@@ -13,6 +13,7 @@ import {
   Server,
   Sparkles,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Chip, Counter, Reveal, Section } from "./primitives";
 
 /* ---------------- About ---------------- */
@@ -49,7 +50,7 @@ export function About() {
           <ul className="mt-5 grid gap-3 sm:grid-cols-2">
             {FOCUS.map((f) => (
               <li key={f} className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Sparkles className="size-4 shrink-0 text-primary" />
+                <Sparkles className="size-4 shrink-0 text-hero-accent" />
                 {f}
               </li>
             ))}
@@ -133,7 +134,7 @@ export function Skills() {
         {SKILLS.map((group, i) => (
           <Reveal key={group.title} delay={i * 80} className="glass glow-hover rounded-3xl p-6">
             <div className="flex items-center gap-3">
-              <span className="grid size-9 place-items-center rounded-xl border border-primary/40 text-primary">
+              <span className="grid size-10 place-items-center rounded-2xl bg-hero-panel text-hero-on-panel shadow-[0_10px_25px_-12px_oklch(0.48_0.22_285/0.9)]">
                 <group.icon className="size-4" />
               </span>
               <h3 className="text-base font-semibold">{group.title}</h3>
@@ -183,11 +184,11 @@ export function Experience() {
       <div className="relative border-l border-border pl-6 sm:pl-10">
         {EXPERIENCE.map((e, i) => (
           <Reveal key={e.role} delay={i * 100} className="relative pb-10 last:pb-0">
-            <span className="absolute -left-[1.9rem] top-2 size-3 rounded-full bg-primary shadow-[0_0_0_5px_oklch(0.62_0.23_300_/_0.18)] sm:-left-[2.9rem]" />
+            <span className="absolute -left-[1.9rem] top-2 size-3 rounded-full bg-hero-accent shadow-[0_0_0_5px_oklch(0.82_0.16_82/0.18)] sm:-left-[2.9rem]" />
             <div className="glass glow-hover rounded-3xl p-6">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h3 className="text-lg font-semibold">{e.role}</h3>
-                <span className="font-mono text-xs text-primary">{e.period}</span>
+                <span className="rounded-full bg-hero-accent/15 px-3 py-1 font-mono text-xs text-hero-accent">{e.period}</span>
               </div>
               <p className="mt-1 flex items-center gap-2 text-sm text-muted-foreground">
                 <Briefcase className="size-4" /> {e.org}
@@ -195,7 +196,7 @@ export function Experience() {
               <ul className="mt-4 space-y-2">
                 {e.points.map((p) => (
                   <li key={p} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
-                    <span className="mt-2 size-1 shrink-0 rounded-full bg-primary" />
+                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-hero-accent" />
                     {p}
                   </li>
                 ))}
@@ -261,11 +262,11 @@ export function Projects() {
               <div className="grid gap-6 p-6 sm:p-8 md:grid-cols-[220px_1fr]">
                 <div className="relative grid aspect-[4/3] place-items-center overflow-hidden rounded-2xl border border-border bg-secondary/40 md:aspect-auto">
                   <div className="absolute inset-0 grid-bg opacity-70" />
-                  <p.icon className="relative size-12 text-primary transition-transform duration-500 group-hover:scale-110" />
+                  <p.icon className="relative size-12 text-hero-accent transition-transform duration-500 group-hover:scale-110" />
                 </div>
 
                 <div>
-                  <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">{p.kind}</p>
+                  <p className="font-mono text-xs uppercase tracking-[0.25em] text-hero-accent">{p.kind}</p>
                   <h3 className="mt-2 text-xl font-semibold sm:text-2xl">{p.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.summary}</p>
 
@@ -289,7 +290,7 @@ export function Projects() {
                       type="button"
                       onClick={() => setOpen(expanded ? null : p.title)}
                       aria-expanded={expanded}
-                      className="rounded-full border border-primary/40 px-5 py-2.5 text-sm transition-shadow hover:shadow-[var(--glow-primary)]"
+                      className="rounded-full bg-hero-accent px-5 py-2.5 text-sm font-semibold text-hero-accent-foreground transition-transform hover:-translate-y-0.5"
                     >
                       {expanded ? "Hide Details" : "View Details"}
                     </button>
@@ -336,15 +337,34 @@ export function Services() {
   return (
     <Section id="services" eyebrow="Services" title="What I can do">
       <div className="grid gap-5 md:grid-cols-3">
-        {SERVICES.map((s, i) => (
-          <Reveal key={s.title} delay={i * 100} className="glass glow-hover group rounded-3xl p-7">
-            <span className="grid size-11 place-items-center rounded-2xl border border-primary/40 text-primary transition-shadow group-hover:shadow-[var(--glow-primary)]">
-              <s.icon className="size-5" />
-            </span>
-            <h3 className="mt-5 text-lg font-semibold">{s.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-          </Reveal>
-        ))}
+        {SERVICES.map((s, i) => {
+          const featured = i === 1;
+          return (
+            <Reveal
+              key={s.title}
+              delay={i * 100}
+              className={cn(
+                "glow-hover group rounded-3xl p-7",
+                featured ? "hero-panel text-hero-on-panel" : "glass",
+              )}
+            >
+              <span
+                className={cn(
+                  "grid size-12 place-items-center rounded-2xl transition-transform group-hover:-translate-y-1",
+                  featured
+                    ? "bg-hero-accent text-hero-accent-foreground"
+                    : "bg-hero-panel text-hero-on-panel group-hover:bg-hero-accent group-hover:text-hero-accent-foreground",
+                )}
+              >
+                <s.icon className="size-5" />
+              </span>
+              <h3 className="mt-5 text-lg font-semibold">{s.title}</h3>
+              <p className={cn("mt-3 text-sm leading-relaxed", featured ? "text-hero-on-panel/80" : "text-muted-foreground")}>
+                {s.body}
+              </p>
+            </Reveal>
+          );
+        })}
       </div>
     </Section>
   );
@@ -363,14 +383,14 @@ export function Education() {
     <Section id="education" eyebrow="Education" title="Education & learning">
       <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
         <Reveal className="glass glow-hover rounded-3xl p-7">
-          <span className="grid size-11 place-items-center rounded-2xl border border-primary/40 text-primary">
+          <span className="grid size-12 place-items-center rounded-2xl bg-hero-accent text-hero-accent-foreground">
             <GraduationCap className="size-5" />
           </span>
           <h3 className="mt-5 text-lg font-semibold">Bachelor of Engineering — Computer Science Engineering</h3>
           <p className="mt-2 text-sm text-muted-foreground">
             Dr. Rajendra Gode Institute of Technology &amp; Research, Amravati
           </p>
-          <p className="mt-1 font-mono text-xs text-primary">2021 – 2024</p>
+          <p className="mt-2 inline-block rounded-full bg-hero-accent/15 px-3 py-1 font-mono text-xs text-hero-accent">2021 – 2024</p>
           <div className="mt-5 flex flex-wrap gap-2">
             <Chip>Computer Science</Chip>
             <Chip>Machine Learning</Chip>
@@ -382,7 +402,7 @@ export function Education() {
           <ul className="mt-5 space-y-3">
             {LEARNING.map((l) => (
               <li key={l} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
-                <span className="mt-2 size-1 shrink-0 rounded-full bg-primary" />
+                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-hero-accent" />
                 {l}
               </li>
             ))}
@@ -404,15 +424,18 @@ const STATS = [
 
 export function Stats() {
   return (
-    <section className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8">
-      <Reveal className="glass grid gap-8 rounded-3xl p-8 sm:grid-cols-2 lg:grid-cols-4">
+    <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-8">
+      <Reveal className="hero-panel grid gap-8 rounded-[2rem] p-8 text-hero-on-panel sm:grid-cols-2 lg:grid-cols-4">
         {STATS.map((s) => (
           <div key={s.label}>
-            <Counter value={s.value} suffix={s.suffix} />
-            <p className="mt-2 text-sm text-muted-foreground">{s.label}</p>
+            <span className="font-display text-4xl font-semibold text-hero-accent sm:text-5xl">
+              <Counter value={s.value} suffix={s.suffix} />
+            </span>
+            <p className="mt-2 text-sm text-hero-on-panel/75">{s.label}</p>
           </div>
         ))}
       </Reveal>
     </section>
   );
 }
+

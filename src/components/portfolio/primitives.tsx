@@ -68,7 +68,7 @@ export function Section({
   return (
     <section id={id} className={cn("relative mx-auto w-full max-w-6xl px-5 py-24 sm:px-8", className)}>
       <Reveal className="mb-12 max-w-2xl">
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">{eyebrow}</p>
+        <p className="font-mono text-xs uppercase tracking-[0.3em] text-hero-accent">{eyebrow}</p>
         <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">{title}</h2>
         {subtitle ? <p className="mt-4 text-base leading-relaxed text-muted-foreground">{subtitle}</p> : null}
       </Reveal>
@@ -100,7 +100,7 @@ export function Counter({ value, suffix = "" }: { value: number; suffix?: string
   }, [visible, value]);
 
   return (
-    <span ref={ref} className="font-display text-4xl font-semibold text-gradient sm:text-5xl">
+    <span ref={ref} className="font-display text-4xl font-semibold sm:text-5xl">
       {n}
       {suffix}
     </span>
@@ -109,7 +109,7 @@ export function Counter({ value, suffix = "" }: { value: number; suffix?: string
 
 export function Chip({ children }: { children: ReactNode }) {
   return (
-    <span className="rounded-full border border-border bg-secondary/50 px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground">
+    <span className="rounded-full border border-border bg-secondary/50 px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-hero-accent/70 hover:bg-hero-accent/10 hover:text-foreground">
       {children}
     </span>
   );
