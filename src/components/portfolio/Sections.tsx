@@ -336,15 +336,34 @@ export function Services() {
   return (
     <Section id="services" eyebrow="Services" title="What I can do">
       <div className="grid gap-5 md:grid-cols-3">
-        {SERVICES.map((s, i) => (
-          <Reveal key={s.title} delay={i * 100} className="glass glow-hover group rounded-3xl p-7">
-            <span className="grid size-12 place-items-center rounded-2xl bg-hero-panel text-hero-on-panel transition-transform group-hover:-translate-y-1 group-hover:bg-hero-accent group-hover:text-hero-accent-foreground">
-              <s.icon className="size-5" />
-            </span>
-            <h3 className="mt-5 text-lg font-semibold">{s.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-          </Reveal>
-        ))}
+        {SERVICES.map((s, i) => {
+          const featured = i === 1;
+          return (
+            <Reveal
+              key={s.title}
+              delay={i * 100}
+              className={cn(
+                "glow-hover group rounded-3xl p-7",
+                featured ? "hero-panel text-hero-on-panel" : "glass",
+              )}
+            >
+              <span
+                className={cn(
+                  "grid size-12 place-items-center rounded-2xl transition-transform group-hover:-translate-y-1",
+                  featured
+                    ? "bg-hero-accent text-hero-accent-foreground"
+                    : "bg-hero-panel text-hero-on-panel group-hover:bg-hero-accent group-hover:text-hero-accent-foreground",
+                )}
+              >
+                <s.icon className="size-5" />
+              </span>
+              <h3 className="mt-5 text-lg font-semibold">{s.title}</h3>
+              <p className={cn("mt-3 text-sm leading-relaxed", featured ? "text-hero-on-panel/80" : "text-muted-foreground")}>
+                {s.body}
+              </p>
+            </Reveal>
+          );
+        })}
       </div>
     </Section>
   );
