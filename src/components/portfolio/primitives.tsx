@@ -100,7 +100,7 @@ export function Counter({ value, suffix = "" }: { value: number; suffix?: string
   }, [visible, value]);
 
   return (
-    <span ref={ref} className="font-display text-4xl font-semibold text-gradient sm:text-5xl">
+    <span ref={ref} className="font-display text-4xl font-semibold sm:text-5xl">
       {n}
       {suffix}
     </span>

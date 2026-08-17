@@ -404,15 +404,18 @@ const STATS = [
 
 export function Stats() {
   return (
-    <section className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8">
-      <Reveal className="glass grid gap-8 rounded-3xl p-8 sm:grid-cols-2 lg:grid-cols-4">
+    <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-8">
+      <Reveal className="hero-panel grid gap-8 rounded-[2rem] p-8 text-hero-on-panel sm:grid-cols-2 lg:grid-cols-4">
         {STATS.map((s) => (
           <div key={s.label}>
-            <Counter value={s.value} suffix={s.suffix} />
-            <p className="mt-2 text-sm text-muted-foreground">{s.label}</p>
+            <span className="font-display text-4xl font-semibold text-hero-accent sm:text-5xl">
+              <Counter value={s.value} suffix={s.suffix} />
+            </span>
+            <p className="mt-2 text-sm text-hero-on-panel/75">{s.label}</p>
           </div>
         ))}
       </Reveal>
     </section>
   );
 }
+
