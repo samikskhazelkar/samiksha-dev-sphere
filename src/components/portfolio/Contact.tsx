@@ -55,7 +55,7 @@ export function Contact() {
           <ul className="space-y-4">
             {DETAILS.map(({ icon: Icon, label, href }) => (
               <li key={label} className="flex items-center gap-3 text-sm text-muted-foreground">
-                <span className="grid size-9 shrink-0 place-items-center rounded-xl border border-primary/40 text-primary">
+                <span className="grid size-10 shrink-0 place-items-center rounded-2xl bg-hero-panel text-hero-on-panel">
                   <Icon className="size-4" />
                 </span>
                 {href ? (
@@ -120,12 +120,12 @@ export function Contact() {
 
             <button
               type="submit"
-              className="mt-1 inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-shadow hover:shadow-[var(--glow-primary)]"
+              className="mt-1 inline-flex items-center justify-center rounded-full bg-hero-accent px-6 py-3 text-sm font-semibold text-hero-accent-foreground transition-transform hover:-translate-y-0.5"
             >
               Send Message
             </button>
 
-            <p aria-live="polite" className="min-h-5 text-xs text-primary">
+            <p aria-live="polite" className="min-h-5 text-xs text-hero-accent">
               {sent ? "Thanks! Your email draft is ready — send it and I'll reply soon." : ""}
             </p>
           </form>
@@ -172,7 +172,7 @@ export function Footer() {
           <a
             href="#home"
             aria-label="Back to top"
-            className="grid size-10 place-items-center rounded-xl border border-primary/40 text-primary transition-shadow hover:shadow-[var(--glow-primary)]"
+            className="grid size-10 place-items-center rounded-xl bg-hero-accent text-hero-accent-foreground transition-transform hover:-translate-y-0.5"
           >
             <ArrowUp className="size-4" />
           </a>
