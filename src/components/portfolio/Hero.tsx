@@ -121,14 +121,22 @@ export function Hero() {
           </div>
 
           <div className="relative mx-auto w-full max-w-sm">
-            <div className="relative">
-              <img
-                src={profile.url}
-                alt="Portrait of Samiksha Sunil Zelkar"
-                width={928}
-                height={1200}
-                className="relative z-10 mx-auto aspect-[4/5] w-full max-w-[22rem] rounded-[2rem] object-cover object-top"
-              />
+            <div className="relative flex items-center justify-center">
+              {/* yellow halo rings */}
+              <div className="absolute inset-0 rounded-full bg-hero-accent/20 blur-2xl" />
+              <div className="absolute -inset-3 rounded-full border-2 border-hero-accent/40" />
+              <div className="absolute -inset-6 rounded-full border border-dashed border-hero-on-panel/20" />
+
+              {/* circular mask portrait */}
+              <div className="relative z-10 aspect-square w-full max-w-[20rem] overflow-hidden rounded-full border-4 border-hero-accent bg-hero-panel shadow-2xl">
+                <img
+                  src={profile.url}
+                  alt="Portrait of Samiksha Sunil Zelkar"
+                  width={423}
+                  height={800}
+                  className="h-full w-full object-cover object-top"
+                />
+              </div>
 
               <div className="absolute -left-2 top-8 z-20 flex items-center gap-3 rounded-2xl bg-background/95 px-4 py-3 shadow-lg sm:-left-8">
                 <span className="text-2xl font-semibold text-hero-panel">6+</span>
