@@ -13,6 +13,7 @@ import {
   Server,
   Sparkles,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Chip, Counter, Reveal, Section } from "./primitives";
 
 /* ---------------- About ---------------- */
