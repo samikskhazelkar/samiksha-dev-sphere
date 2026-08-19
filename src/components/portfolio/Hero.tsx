@@ -71,14 +71,17 @@ export function Hero() {
             <h1 className="mt-6 text-4xl font-semibold leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
               Hello, I&apos;m
               <br />
-              Samiksha Zelkar An
+              Samiksha Zelkar
               <br />
               <span className="text-hero-accent">Backend Developer</span>
             </h1>
 
-            <p className="mt-5 font-mono text-sm text-hero-on-panel/80 sm:text-base">
-              {typed}
-              <span className="caret ml-0.5 text-hero-accent">_</span>
+            <p className="mt-5 font-mono text-sm text-hero-on-panel/80 sm:text-base" aria-label="Roles">
+              <span aria-hidden>
+                {typed}
+                <span className="caret ml-0.5 text-hero-accent">_</span>
+              </span>
+              <span className="sr-only">{ROLES.join(", ")}</span>
             </p>
 
             <p className="mt-4 max-w-lg text-sm leading-relaxed text-hero-on-panel/75 sm:text-base">
@@ -102,8 +105,12 @@ export function Hero() {
               </a>
               <div className="flex items-center gap-2">
                 {[
-                  { href: "https://github.com/", label: "GitHub", Icon: Github },
-                  { href: "https://www.linkedin.com/", label: "LinkedIn", Icon: Linkedin },
+                  { href: "https://github.com/samikskhazelkar", label: "GitHub", Icon: Github },
+                  {
+                    href: "https://linkedin.com/in/samiksha-zelkar-1235652bb/",
+                    label: "LinkedIn",
+                    Icon: Linkedin,
+                  },
                   { href: "#contact", label: "Contact", Icon: Mail },
                 ].map(({ href, label, Icon }) => (
                   <a
