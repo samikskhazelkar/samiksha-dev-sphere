@@ -92,8 +92,20 @@ export function Contact() {
                 <label htmlFor="name" className="mb-2 block text-xs text-muted-foreground">
                   Name
                 </label>
-                <input id="name" name="name" className={field} placeholder="Your name" />
-                {errors.name ? <p className="mt-1.5 text-xs text-destructive">{errors.name}</p> : null}
+                <input
+                  id="name"
+                  name="name"
+                  autoComplete="name"
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? "name-error" : undefined}
+                  className={field}
+                  placeholder="Your name"
+                />
+                {errors.name ? (
+                  <p id="name-error" className="mt-1.5 text-xs text-destructive">
+                    {errors.name}
+                  </p>
+                ) : null}
               </div>
               <div>
                 <label htmlFor="email" className="mb-2 block text-xs text-muted-foreground">
