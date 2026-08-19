@@ -43,7 +43,7 @@ export function Hero() {
   const typed = useTyping();
 
   return (
-    <section id="home" className="mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-8">
+    <section id="home" className="mx-auto max-w-6xl scroll-mt-24 px-4 pb-16 pt-24 sm:px-8">
       <div className="hero-panel animate-fade-in relative overflow-hidden rounded-[2.5rem] px-6 py-12 text-hero-on-panel shadow-[0_40px_120px_-40px_oklch(0.48_0.22_285/0.7)] sm:px-12 sm:py-16">
         {/* decorative accents */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
