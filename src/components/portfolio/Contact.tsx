@@ -30,8 +30,10 @@ export function Contact() {
     if (get("subject").length < 3) next.subject = "Please add a subject.";
     if (get("message").length < 10) next.message = "Message should be at least 10 characters.";
     setErrors(next);
-    if (Object.keys(next).length > 0) {
+    const firstInvalid = Object.keys(next)[0];
+    if (firstInvalid) {
       setSent(false);
+      form.querySelector<HTMLElement>(`[name="${firstInvalid}"]`)?.focus();
       return;
     }
     const body = `${get("message")}\n\n— ${get("name")} (${get("email")})`;
