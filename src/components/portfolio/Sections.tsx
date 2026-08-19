@@ -428,9 +428,7 @@ export function Stats() {
       <Reveal className="hero-panel grid gap-8 rounded-[2rem] p-8 text-hero-on-panel sm:grid-cols-2 lg:grid-cols-4">
         {STATS.map((s) => (
           <div key={s.label}>
-            <span className="font-display text-4xl font-semibold text-hero-accent sm:text-5xl">
-              <Counter value={s.value} suffix={s.suffix} />
-            </span>
+            <Counter value={s.value} suffix={s.suffix} className="text-hero-accent" />
             <p className="mt-2 text-sm text-hero-on-panel/75">{s.label}</p>
           </div>
         ))}

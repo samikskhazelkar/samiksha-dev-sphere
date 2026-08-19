@@ -111,7 +111,7 @@ export function Counter({
   }, [visible, value]);
 
   return (
-    <span ref={ref} className="font-display text-4xl font-semibold sm:text-5xl">
+    <span ref={ref} className={cn("font-display text-4xl font-semibold sm:text-5xl", className)}>
       {n}
       {suffix}
     </span>
