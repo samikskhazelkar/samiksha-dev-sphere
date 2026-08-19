@@ -258,7 +258,7 @@ export function Projects() {
         {PROJECTS.map((p, i) => {
           const expanded = open === p.title;
           return (
-            <Reveal key={p.title} delay={i * 90} className="glass glow-hover overflow-hidden rounded-3xl">
+            <Reveal key={p.title} delay={i * 90} className="glass glow-hover group overflow-hidden rounded-3xl">
               <div className="grid gap-6 p-6 sm:p-8 md:grid-cols-[220px_1fr]">
                 <div className="relative grid aspect-[4/3] place-items-center overflow-hidden rounded-2xl border border-border bg-secondary/40 md:aspect-auto">
                   <div className="absolute inset-0 grid-bg opacity-70" />
@@ -298,9 +298,10 @@ export function Projects() {
                       href="https://github.com/samikskhazelkar"
                       target="_blank"
                       rel="noreferrer"
+                      aria-label={`View source code for ${p.title} on GitHub`}
                       className="rounded-full border border-border px-5 py-2.5 text-sm text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground"
                     >
-                      View Project
+                      View on GitHub
                     </a>
                   </div>
                 </div>
@@ -428,9 +429,7 @@ export function Stats() {
       <Reveal className="hero-panel grid gap-8 rounded-[2rem] p-8 text-hero-on-panel sm:grid-cols-2 lg:grid-cols-4">
         {STATS.map((s) => (
           <div key={s.label}>
-            <span className="font-display text-4xl font-semibold text-hero-accent sm:text-5xl">
-              <Counter value={s.value} suffix={s.suffix} />
-            </span>
+            <Counter value={s.value} suffix={s.suffix} className="text-hero-accent" />
             <p className="mt-2 text-sm text-hero-on-panel/75">{s.label}</p>
           </div>
         ))}

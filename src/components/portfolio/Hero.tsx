@@ -43,15 +43,15 @@ export function Hero() {
   const typed = useTyping();
 
   return (
-    <section id="home" className="mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-8">
+    <section id="home" className="mx-auto max-w-6xl scroll-mt-24 px-4 pb-16 pt-24 sm:px-8">
       <div className="hero-panel animate-fade-in relative overflow-hidden rounded-[2.5rem] px-6 py-12 text-hero-on-panel shadow-[0_40px_120px_-40px_oklch(0.48_0.22_285/0.7)] sm:px-12 sm:py-16">
         {/* decorative accents */}
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute right-[18%] top-16 size-72 rounded-full bg-hero-accent/90 blur-[2px] sm:size-80" />
-          <div className="absolute right-[6%] top-1/2 size-28 rounded-full bg-hero-accent/80" />
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute right-[18%] top-16 hidden size-72 rounded-full bg-hero-accent/90 blur-[2px] lg:block lg:size-80" />
+          <div className="absolute right-[6%] top-1/2 hidden size-28 rounded-full bg-hero-accent/80 lg:block" />
           <div className="absolute -left-16 -top-16 size-64 rounded-full border border-hero-on-panel/15" />
           <div className="absolute bottom-8 left-10 size-40 rounded-full border border-hero-on-panel/10" />
-          <div className="absolute left-6 top-24 flex flex-col gap-3 sm:left-8">
+          <div className="absolute left-6 top-24 hidden flex-col gap-3 sm:left-8 lg:flex">
             {[0, 1, 2, 3, 4].map((d) => (
               <span key={d} className="size-1.5 rounded-full bg-hero-on-panel/60" />
             ))}
@@ -71,14 +71,17 @@ export function Hero() {
             <h1 className="mt-6 text-4xl font-semibold leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
               Hello, I&apos;m
               <br />
-              Samiksha Zelkar An
+              Samiksha Zelkar
               <br />
               <span className="text-hero-accent">Backend Developer</span>
             </h1>
 
-            <p className="mt-5 font-mono text-sm text-hero-on-panel/80 sm:text-base">
-              {typed}
-              <span className="caret ml-0.5 text-hero-accent">_</span>
+            <p className="mt-5 font-mono text-sm text-hero-on-panel/80 sm:text-base" aria-label="Roles">
+              <span aria-hidden>
+                {typed}
+                <span className="caret ml-0.5 text-hero-accent">_</span>
+              </span>
+              <span className="sr-only">{ROLES.join(", ")}</span>
             </p>
 
             <p className="mt-4 max-w-lg text-sm leading-relaxed text-hero-on-panel/75 sm:text-base">
@@ -102,8 +105,12 @@ export function Hero() {
               </a>
               <div className="flex items-center gap-2">
                 {[
-                  { href: "https://github.com/", label: "GitHub", Icon: Github },
-                  { href: "https://www.linkedin.com/", label: "LinkedIn", Icon: Linkedin },
+                  { href: "https://github.com/samikskhazelkar", label: "GitHub", Icon: Github },
+                  {
+                    href: "https://linkedin.com/in/samiksha-zelkar-1235652bb/",
+                    label: "LinkedIn",
+                    Icon: Linkedin,
+                  },
                   { href: "#contact", label: "Contact", Icon: Mail },
                 ].map(({ href, label, Icon }) => (
                   <a
@@ -138,7 +145,7 @@ export function Hero() {
                 />
               </div>
 
-              <div className="absolute -left-2 top-8 z-20 flex items-center gap-3 rounded-2xl bg-background/95 px-4 py-3 shadow-lg sm:-left-8">
+              <div className="absolute left-0 top-4 z-20 flex items-center gap-3 rounded-2xl bg-background/95 px-4 py-3 shadow-lg sm:top-8 lg:-left-8">
                 <span className="text-2xl font-semibold text-hero-panel">6+</span>
                 <span className="text-[11px] font-medium leading-tight text-muted-foreground">
                   Months
@@ -147,7 +154,7 @@ export function Hero() {
                 </span>
               </div>
 
-              <div className="absolute -right-1 bottom-10 z-20 rounded-2xl bg-background/95 px-4 py-3 shadow-lg sm:-right-6">
+              <div className="absolute bottom-6 right-0 z-20 rounded-2xl bg-background/95 px-4 py-3 shadow-lg lg:-right-6">
                 <p className="text-sm font-semibold text-foreground">APIs &amp; Data</p>
                 <p className="font-mono text-[11px] text-muted-foreground">C# · .NET · Python</p>
               </div>

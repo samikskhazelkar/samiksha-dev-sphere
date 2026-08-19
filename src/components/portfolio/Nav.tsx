@@ -99,6 +99,15 @@ export function Nav() {
                 </a>
               </li>
             ))}
+            <li className="pb-2 pt-3">
+              <a
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="block rounded-full bg-hero-accent px-5 py-3 text-center text-sm font-semibold text-hero-accent-foreground"
+              >
+                Hire me
+              </a>
+            </li>
           </ul>
         </div>
       ) : null}
