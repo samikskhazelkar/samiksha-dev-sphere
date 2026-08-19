@@ -145,7 +145,7 @@ export function Hero() {
                 />
               </div>
 
-              <div className="absolute -left-2 top-8 z-20 flex items-center gap-3 rounded-2xl bg-background/95 px-4 py-3 shadow-lg sm:-left-8">
+              <div className="absolute left-0 top-4 z-20 flex items-center gap-3 rounded-2xl bg-background/95 px-4 py-3 shadow-lg sm:top-8 lg:-left-8">
                 <span className="text-2xl font-semibold text-hero-panel">6+</span>
                 <span className="text-[11px] font-medium leading-tight text-muted-foreground">
                   Months
@@ -154,7 +154,7 @@ export function Hero() {
                 </span>
               </div>
 
-              <div className="absolute -right-1 bottom-10 z-20 rounded-2xl bg-background/95 px-4 py-3 shadow-lg sm:-right-6">
+              <div className="absolute bottom-6 right-0 z-20 rounded-2xl bg-background/95 px-4 py-3 shadow-lg lg:-right-6">
                 <p className="text-sm font-semibold text-foreground">APIs &amp; Data</p>
                 <p className="font-mono text-[11px] text-muted-foreground">C# · .NET · Python</p>
               </div>
