@@ -111,23 +111,59 @@ export function Contact() {
                 <label htmlFor="email" className="mb-2 block text-xs text-muted-foreground">
                   Email
                 </label>
-                <input id="email" name="email" className={field} placeholder="you@example.com" />
-                {errors.email ? <p className="mt-1.5 text-xs text-destructive">{errors.email}</p> : null}
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? "email-error" : undefined}
+                  className={field}
+                  placeholder="you@example.com"
+                />
+                {errors.email ? (
+                  <p id="email-error" className="mt-1.5 text-xs text-destructive">
+                    {errors.email}
+                  </p>
+                ) : null}
               </div>
             </div>
             <div>
               <label htmlFor="subject" className="mb-2 block text-xs text-muted-foreground">
                 Subject
               </label>
-              <input id="subject" name="subject" className={field} placeholder="What's this about?" />
-              {errors.subject ? <p className="mt-1.5 text-xs text-destructive">{errors.subject}</p> : null}
+              <input
+                id="subject"
+                name="subject"
+                aria-invalid={!!errors.subject}
+                aria-describedby={errors.subject ? "subject-error" : undefined}
+                className={field}
+                placeholder="What's this about?"
+              />
+              {errors.subject ? (
+                <p id="subject-error" className="mt-1.5 text-xs text-destructive">
+                  {errors.subject}
+                </p>
+              ) : null}
             </div>
             <div>
               <label htmlFor="message" className="mb-2 block text-xs text-muted-foreground">
                 Message
               </label>
-              <textarea id="message" name="message" rows={5} className={field} placeholder="Tell me a bit more…" />
-              {errors.message ? <p className="mt-1.5 text-xs text-destructive">{errors.message}</p> : null}
+              <textarea
+                id="message"
+                name="message"
+                rows={5}
+                aria-invalid={!!errors.message}
+                aria-describedby={errors.message ? "message-error" : undefined}
+                className={field}
+                placeholder="Tell me a bit more…"
+              />
+              {errors.message ? (
+                <p id="message-error" className="mt-1.5 text-xs text-destructive">
+                  {errors.message}
+                </p>
+              ) : null}
             </div>
 
             <button
