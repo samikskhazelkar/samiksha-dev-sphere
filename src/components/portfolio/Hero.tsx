@@ -46,12 +46,12 @@ export function Hero() {
     <section id="home" className="mx-auto max-w-6xl scroll-mt-24 px-4 pb-16 pt-24 sm:px-8">
       <div className="hero-panel animate-fade-in relative overflow-hidden rounded-[2.5rem] px-6 py-12 text-hero-on-panel shadow-[0_40px_120px_-40px_oklch(0.48_0.22_285/0.7)] sm:px-12 sm:py-16">
         {/* decorative accents */}
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute right-[18%] top-16 size-72 rounded-full bg-hero-accent/90 blur-[2px] sm:size-80" />
-          <div className="absolute right-[6%] top-1/2 size-28 rounded-full bg-hero-accent/80" />
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute right-[18%] top-16 hidden size-72 rounded-full bg-hero-accent/90 blur-[2px] lg:block lg:size-80" />
+          <div className="absolute right-[6%] top-1/2 hidden size-28 rounded-full bg-hero-accent/80 lg:block" />
           <div className="absolute -left-16 -top-16 size-64 rounded-full border border-hero-on-panel/15" />
           <div className="absolute bottom-8 left-10 size-40 rounded-full border border-hero-on-panel/10" />
-          <div className="absolute left-6 top-24 flex flex-col gap-3 sm:left-8">
+          <div className="absolute left-6 top-24 hidden flex-col gap-3 sm:left-8 lg:flex">
             {[0, 1, 2, 3, 4].map((d) => (
               <span key={d} className="size-1.5 rounded-full bg-hero-on-panel/60" />
             ))}
