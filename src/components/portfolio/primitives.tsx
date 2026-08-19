@@ -66,7 +66,10 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section id={id} className={cn("relative mx-auto w-full max-w-6xl px-5 py-24 sm:px-8", className)}>
+    <section
+      id={id}
+      className={cn("relative mx-auto w-full max-w-6xl scroll-mt-24 px-5 py-24 sm:px-8", className)}
+    >
       <Reveal className="mb-12 max-w-2xl">
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-hero-accent">{eyebrow}</p>
         <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">{title}</h2>
@@ -77,7 +80,15 @@ export function Section({
   );
 }
 
-export function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
+export function Counter({
+  value,
+  suffix = "",
+  className,
+}: {
+  value: number;
+  suffix?: string;
+  className?: string;
+}) {
   const { ref, visible } = useReveal<HTMLSpanElement>();
   const [n, setN] = useState(0);
 
