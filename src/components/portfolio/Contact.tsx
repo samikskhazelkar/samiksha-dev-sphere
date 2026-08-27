@@ -1,8 +1,14 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { ArrowUp, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { Reveal, Section } from "./primitives";
 
 type Errors = Partial<Record<"name" | "email" | "subject" | "message", string>>;
+type Status = "idle" | "sending" | "sent" | "error";
+
+const EMAILJS_SERVICE_ID = "service_axw1vt3";
+const EMAILJS_TEMPLATE_ID = "template_4xefvpz";
+const EMAILJS_PUBLIC_KEY = "ppFrBeNpz8aKUfvOXMIWD";
 
 const DETAILS = [
   { icon: Mail, label: "samikshazelkar1999@gmail.com", href: "mailto:samikshazelkar1999@gmail.com" },
