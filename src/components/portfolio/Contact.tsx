@@ -23,9 +23,9 @@ const SOCIALS = [
 
 export function Contact() {
   const [errors, setErrors] = useState<Errors>({});
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
@@ -38,14 +38,34 @@ export function Contact() {
     setErrors(next);
     const firstInvalid = Object.keys(next)[0];
     if (firstInvalid) {
-      setSent(false);
+      setStatus("idle");
       form.querySelector<HTMLElement>(`[name="${firstInvalid}"]`)?.focus();
       return;
     }
-    const body = `${get("message")}\n\n— ${get("name")} (${get("email")})`;
-    window.location.href = `mailto:samikshazelkar1999@gmail.com?subject=${encodeURIComponent(get("subject"))}&body=${encodeURIComponent(body)}`;
-    setSent(true);
-    form.reset();
+
+    setStatus("sending");
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          name: get("name"),
+          from_name: get("name"),
+          email: get("email"),
+          reply_to: get("email"),
+          subject: get("subject"),
+          title: get("subject"),
+          message: get("message"),
+          time: new Date().toLocaleString(),
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY },
+      );
+      setStatus("sent");
+      form.reset();
+    } catch (err) {
+      console.error("EmailJS send failed", err);
+      setStatus("error");
+    }
   }
 
   const field =
