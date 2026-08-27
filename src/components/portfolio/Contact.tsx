@@ -1,8 +1,14 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { ArrowUp, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { Reveal, Section } from "./primitives";
 
 type Errors = Partial<Record<"name" | "email" | "subject" | "message", string>>;
+type Status = "idle" | "sending" | "sent" | "error";
+
+const EMAILJS_SERVICE_ID = "service_axw1vt3";
+const EMAILJS_TEMPLATE_ID = "template_4xefvpz";
+const EMAILJS_PUBLIC_KEY = "ppFrBeNpz8aKUfvOXMIWD";
 
 const DETAILS = [
   { icon: Mail, label: "samikshazelkar1999@gmail.com", href: "mailto:samikshazelkar1999@gmail.com" },
@@ -17,9 +23,9 @@ const SOCIALS = [
 
 export function Contact() {
   const [errors, setErrors] = useState<Errors>({});
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
@@ -32,14 +38,34 @@ export function Contact() {
     setErrors(next);
     const firstInvalid = Object.keys(next)[0];
     if (firstInvalid) {
-      setSent(false);
+      setStatus("idle");
       form.querySelector<HTMLElement>(`[name="${firstInvalid}"]`)?.focus();
       return;
     }
-    const body = `${get("message")}\n\n— ${get("name")} (${get("email")})`;
-    window.location.href = `mailto:samikshazelkar1999@gmail.com?subject=${encodeURIComponent(get("subject"))}&body=${encodeURIComponent(body)}`;
-    setSent(true);
-    form.reset();
+
+    setStatus("sending");
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          name: get("name"),
+          from_name: get("name"),
+          email: get("email"),
+          reply_to: get("email"),
+          subject: get("subject"),
+          title: get("subject"),
+          message: get("message"),
+          time: new Date().toLocaleString(),
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY },
+      );
+      setStatus("sent");
+      form.reset();
+    } catch (err) {
+      console.error("EmailJS send failed", err);
+      setStatus("error");
+    }
   }
 
   const field =
@@ -170,13 +196,21 @@ export function Contact() {
 
             <button
               type="submit"
-              className="mt-1 inline-flex items-center justify-center rounded-full bg-hero-accent px-6 py-3 text-sm font-semibold text-hero-accent-foreground transition-transform hover:-translate-y-0.5"
+              disabled={status === "sending"}
+              className="mt-1 inline-flex items-center justify-center rounded-full bg-hero-accent px-6 py-3 text-sm font-semibold text-hero-accent-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
             >
-              Send Message
+              {status === "sending" ? "Sending…" : "Send Message"}
             </button>
 
-            <p aria-live="polite" className="min-h-5 text-xs text-hero-accent">
-              {sent ? "Thanks! Your email draft is ready — send it and I'll reply soon." : ""}
+            <p
+              aria-live="polite"
+              className={`min-h-5 text-xs ${status === "error" ? "text-destructive" : "text-hero-accent"}`}
+            >
+              {status === "sent"
+                ? "Thanks! Your message has been sent — I'll reply soon."
+                : status === "error"
+                  ? "Something went wrong. Please email samikshazelkar1999@gmail.com directly."
+                  : ""}
             </p>
           </form>
         </Reveal>
