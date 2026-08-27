@@ -196,13 +196,21 @@ export function Contact() {
 
             <button
               type="submit"
-              className="mt-1 inline-flex items-center justify-center rounded-full bg-hero-accent px-6 py-3 text-sm font-semibold text-hero-accent-foreground transition-transform hover:-translate-y-0.5"
+              disabled={status === "sending"}
+              className="mt-1 inline-flex items-center justify-center rounded-full bg-hero-accent px-6 py-3 text-sm font-semibold text-hero-accent-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
             >
-              Send Message
+              {status === "sending" ? "Sending…" : "Send Message"}
             </button>
 
-            <p aria-live="polite" className="min-h-5 text-xs text-hero-accent">
-              {sent ? "Thanks! Your email draft is ready — send it and I'll reply soon." : ""}
+            <p
+              aria-live="polite"
+              className={`min-h-5 text-xs ${status === "error" ? "text-destructive" : "text-hero-accent"}`}
+            >
+              {status === "sent"
+                ? "Thanks! Your message has been sent — I'll reply soon."
+                : status === "error"
+                  ? "Something went wrong. Please email samikshazelkar1999@gmail.com directly."
+                  : ""}
             </p>
           </form>
         </Reveal>
