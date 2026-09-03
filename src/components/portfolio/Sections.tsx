@@ -396,7 +396,20 @@ export function Education() {
             <Chip>Computer Science</Chip>
             <Chip>Machine Learning</Chip>
           </div>
+          <ul className="mt-6 space-y-4 border-t border-border pt-6">
+            {PRIOR_EDUCATION.map((e, i) => (
+              <li key={e.title} className="flex gap-3">
+                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-hero-accent" />
+                <div>
+                  <p className="text-sm font-semibold">{e.title}</p>
+                  <p className="text-sm text-muted-foreground">{e.org}</p>
+                  <p className="mt-1 font-mono text-xs text-hero-accent">{e.period}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </Reveal>
+
 
         <Reveal delay={120} className="glass glow-hover rounded-3xl p-7">
           <h3 className="text-lg font-semibold">Additional learning</h3>
