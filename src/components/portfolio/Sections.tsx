@@ -350,6 +350,7 @@ export function Services() {
                 "glow-hover group cursor-pointer rounded-3xl p-7 transition-colors",
                 featured ? "hero-panel text-hero-on-panel" : "glass",
               )}
+              onClick={() => setActive(i)}
             >
               <span
                 className={cn(
