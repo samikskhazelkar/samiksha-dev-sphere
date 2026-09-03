@@ -215,7 +215,7 @@ export function Contact() {
               {status === "sent"
                 ? "Thanks! Your message has been sent — I'll reply soon."
                 : status === "error"
-                  ? "Something went wrong. Please email samikshazelkar1999@gmail.com directly."
+                  ? `Couldn't send${errorDetail ? ` (${errorDetail})` : ""}. Please email samikshazelkar1999@gmail.com directly.`
                   : ""}
             </p>
           </form>
