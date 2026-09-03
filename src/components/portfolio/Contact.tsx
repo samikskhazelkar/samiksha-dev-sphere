@@ -24,6 +24,7 @@ const SOCIALS = [
 export function Contact() {
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
+  const [errorDetail, setErrorDetail] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -64,6 +65,11 @@ export function Contact() {
       form.reset();
     } catch (err) {
       console.error("EmailJS send failed", err);
+      const detail =
+        typeof err === "object" && err !== null && "text" in err
+          ? String((err as { text?: unknown }).text ?? "")
+          : "";
+      setErrorDetail(detail);
       setStatus("error");
     }
   }
@@ -209,7 +215,7 @@ export function Contact() {
               {status === "sent"
                 ? "Thanks! Your message has been sent — I'll reply soon."
                 : status === "error"
-                  ? "Something went wrong. Please email samikshazelkar1999@gmail.com directly."
+                  ? `Couldn't send${errorDetail ? ` (${errorDetail})` : ""}. Please email samikshazelkar1999@gmail.com directly.`
                   : ""}
             </p>
           </form>
