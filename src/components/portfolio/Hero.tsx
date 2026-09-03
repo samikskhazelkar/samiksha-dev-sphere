@@ -107,7 +107,7 @@ export function Hero() {
                 {[
                   { href: "https://github.com/samikskhazelkar", label: "GitHub", Icon: Github },
                   {
-                    href: "https://linkedin.com/in/samiksha-zelkar-1235652bb/",
+                    href: "https://www.linkedin.com/in/samikshazelkar/",
                     label: "LinkedIn",
                     Icon: Linkedin,
                   },

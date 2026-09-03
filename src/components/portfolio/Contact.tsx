@@ -18,7 +18,7 @@ const DETAILS = [
 
 const SOCIALS = [
   { icon: Github, label: "GitHub", href: "https://github.com/samikskhazelkar" },
-  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/samiksha-zelkar-1235652bb/" },
+  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/samikshazelkar/" },
 ];
 
 export function Contact() {
