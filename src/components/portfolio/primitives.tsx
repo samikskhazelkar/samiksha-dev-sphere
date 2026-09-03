@@ -31,17 +31,20 @@ export function Reveal({
   className,
   delay = 0,
   as: Tag = "div",
+  onClick,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   as?: "div" | "li" | "section";
+  onClick?: () => void;
 }) {
   const { ref, visible } = useReveal<HTMLDivElement>();
   return (
     <Tag
       ref={ref as never}
       data-visible={visible}
+      onClick={onClick}
       style={{ transitionDelay: `${delay}ms` }}
       className={cn("reveal", className)}
     >
