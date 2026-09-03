@@ -71,6 +71,11 @@ export function Contact() {
           : "";
       setErrorDetail(detail);
       setStatus("error");
+      // Fallback: open the visitor's mail app with the message prefilled
+      const body = `Name: ${get("name")}\nEmail: ${get("email")}\n\n${get("message")}`;
+      window.location.href = `mailto:samikshazelkar1999@gmail.com?subject=${encodeURIComponent(
+        get("subject"),
+      )}&body=${encodeURIComponent(body)}`;
     }
   }
 
