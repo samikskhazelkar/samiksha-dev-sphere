@@ -335,17 +335,19 @@ const SERVICES = [
 ];
 
 export function Services() {
+  const [active, setActive] = useState(1);
+
   return (
     <Section id="services" eyebrow="Services" title="What I can do">
       <div className="grid gap-5 md:grid-cols-3">
         {SERVICES.map((s, i) => {
-          const featured = i === 1;
+          const featured = active === i;
           return (
             <Reveal
               key={s.title}
               delay={i * 100}
               className={cn(
-                "glow-hover group rounded-3xl p-7",
+                "glow-hover group cursor-pointer rounded-3xl p-7 transition-colors",
                 featured ? "hero-panel text-hero-on-panel" : "glass",
               )}
             >
