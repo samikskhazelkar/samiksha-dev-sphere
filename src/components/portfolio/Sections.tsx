@@ -379,6 +379,25 @@ const LEARNING = [
   "Build ASP.NET Core Web API – Scratch to Finish (.NET 8 API)",
 ];
 
+const PRIOR_EDUCATION = [
+  {
+    title: "Diploma in Computer Engineering",
+    org: "Government Polytechnic Gondia, Gondia",
+    period: "2019 – 2021",
+  },
+  {
+    title: "H.S.C.",
+    org: "Bharat Dyan Mandi Ram College Wardha, Wardha",
+    period: "2017",
+  },
+  {
+    title: "S.S.C.",
+    org: "New English High School Wardha, Wardha",
+    period: "2016",
+  },
+];
+
+
 export function Education() {
   return (
     <Section id="education" eyebrow="Education" title="Education & learning">
