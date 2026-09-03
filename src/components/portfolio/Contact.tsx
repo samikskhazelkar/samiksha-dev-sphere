@@ -64,6 +64,11 @@ export function Contact() {
       form.reset();
     } catch (err) {
       console.error("EmailJS send failed", err);
+      const detail =
+        typeof err === "object" && err !== null && "text" in err
+          ? String((err as { text?: unknown }).text ?? "")
+          : "";
+      setErrorDetail(detail);
       setStatus("error");
     }
   }
