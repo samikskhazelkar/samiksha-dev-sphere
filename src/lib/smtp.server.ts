@@ -1,4 +1,14 @@
-import { connect } from "cloudflare:sockets";
+type ConnectFn = (
+  addr: { hostname: string; port: number },
+  opts?: { secureTransport?: string },
+) => unknown;
+
+async function getConnect(): Promise<ConnectFn> {
+  // Resolved at runtime so bundlers don't try to inline the Workers built-in.
+  const specifier = "cloudflare:sockets";
+  const mod = (await import(/* @vite-ignore */ specifier)) as { connect: ConnectFn };
+  return mod.connect;
+}
 
 type SmtpConfig = {
   host: string;
@@ -91,6 +101,7 @@ class SmtpSession {
 }
 
 export async function sendContactEmail(input: MailInput, cfg: SmtpConfig): Promise<void> {
+  const connect = await getConnect();
   const socket = connect({ hostname: cfg.host, port: cfg.port }, { secureTransport: "on" });
   const session = new SmtpSession(socket as never);
 
