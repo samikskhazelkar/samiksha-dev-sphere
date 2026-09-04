@@ -101,6 +101,7 @@ class SmtpSession {
 }
 
 export async function sendContactEmail(input: MailInput, cfg: SmtpConfig): Promise<void> {
+  const connect = await getConnect();
   const socket = connect({ hostname: cfg.host, port: cfg.port }, { secureTransport: "on" });
   const session = new SmtpSession(socket as never);
 
