@@ -69,9 +69,33 @@ export function Contact() {
         typeof err === "object" && err !== null && "text" in err
           ? String((err as { text?: unknown }).text ?? "")
           : "";
+
+      // Fallback 1: send through the server-side SMTP mailer.
+      try {
+        const res = await fetch("/api/public/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: get("name"),
+            email: get("email"),
+            subject: get("subject"),
+            message: get("message"),
+          }),
+        });
+        if (res.ok) {
+          setErrorDetail("");
+          setStatus("sent");
+          form.reset();
+          return;
+        }
+        console.error("SMTP fallback failed", res.status, await res.text());
+      } catch (smtpErr) {
+        console.error("SMTP fallback request failed", smtpErr);
+      }
+
       setErrorDetail(detail);
       setStatus("error");
-      // Fallback: open the visitor's mail app with the message prefilled
+      // Fallback 2: open the visitor's mail app with the message prefilled
       const body = `Name: ${get("name")}\nEmail: ${get("email")}\n\n${get("message")}`;
       window.location.href = `mailto:samikshazelkar1999@gmail.com?subject=${encodeURIComponent(
         get("subject"),
