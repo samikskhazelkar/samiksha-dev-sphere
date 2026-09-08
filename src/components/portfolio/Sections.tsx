@@ -156,9 +156,12 @@ export function Skills() {
 const EXPERIENCE = [
   {
     role: "Tech Operator Executive",
-    org: "Current role",
+    org: "Novexa Insurance Broking Pvt. Ltd.",
     period: "Present",
-    points: ["Currently working as a Tech Operator Executive."],
+    points: [
+      "Working as a Tech Operator Executive at Novexa Insurance Broking Pvt. Ltd.",
+      "Managing day-to-day technical operations and system support.",
+    ],
   },
   {
     role: "Software Developer Trainee",
