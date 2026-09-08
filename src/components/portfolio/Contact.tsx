@@ -44,6 +44,30 @@ export function Contact() {
     }
 
     setStatus("sending");
+
+    // Primary: deliver through the server-side mailer.
+    try {
+      const res = await fetch("/api/public/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: get("name"),
+          email: get("email"),
+          subject: get("subject"),
+          message: get("message"),
+        }),
+      });
+      if (res.ok) {
+        setStatus("sent");
+        form.reset();
+        return;
+      }
+      console.error("Server mail failed", res.status, await res.text());
+    } catch (serverErr) {
+      console.error("Server mail request failed", serverErr);
+    }
+
+    // Fallback 1: EmailJS, when configured.
     try {
       await emailjs.send(
         EMAILJS_SERVICE_ID,
@@ -62,38 +86,17 @@ export function Contact() {
       );
       setStatus("sent");
       form.reset();
+      return;
     } catch (err) {
       console.error("EmailJS send failed", err);
-
-      // Fallback 1: send through the server-side SMTP mailer.
-      try {
-        const res = await fetch("/api/public/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: get("name"),
-            email: get("email"),
-            subject: get("subject"),
-            message: get("message"),
-          }),
-        });
-        if (res.ok) {
-          setStatus("sent");
-          form.reset();
-          return;
-        }
-        console.error("SMTP fallback failed", res.status, await res.text());
-      } catch (smtpErr) {
-        console.error("SMTP fallback request failed", smtpErr);
-      }
-
-      setStatus("error");
-      // Fallback 2: open the visitor's mail app with the message prefilled
-      const body = `Name: ${get("name")}\nEmail: ${get("email")}\n\n${get("message")}`;
-      window.location.href = `mailto:samikshazelkar1999@gmail.com?subject=${encodeURIComponent(
-        get("subject"),
-      )}&body=${encodeURIComponent(body)}`;
     }
+
+    setStatus("error");
+    // Fallback 2: open the visitor's mail app with the message prefilled
+    const body = `Name: ${get("name")}\nEmail: ${get("email")}\n\n${get("message")}`;
+    window.location.href = `mailto:samikshazelkar1999@gmail.com?subject=${encodeURIComponent(
+      get("subject"),
+    )}&body=${encodeURIComponent(body)}`;
   }
 
   const field =
