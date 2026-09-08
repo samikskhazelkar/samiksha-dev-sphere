@@ -1,14 +1,32 @@
+type WebSocketPair = {
+  readable: ReadableStream<Uint8Array>;
+  writable: WritableStream<Uint8Array>;
+};
+
 type ConnectFn = (
   addr: { hostname: string; port: number },
   opts?: { secureTransport?: string },
-) => unknown;
+) => WebSocketPair;
 
-async function getConnect(): Promise<ConnectFn> {
-  // Resolved at runtime so bundlers don't try to inline the Workers built-in.
-  const specifier = "cloudflare:sockets";
-  const mod = (await import(/* @vite-ignore */ specifier)) as { connect: ConnectFn };
-  return mod.connect;
+async function openSocket(hostname: string, port: number): Promise<WebSocketPair> {
+  // Cloudflare Workers path (production). Resolved at runtime so bundlers
+  // don't try to inline the Workers built-in.
+  try {
+    const specifier = "cloudflare:sockets";
+    const mod = (await import(/* @vite-ignore */ specifier)) as { connect: ConnectFn };
+    return mod.connect({ hostname, port }, { secureTransport: "on" });
+  } catch {
+    // Node path (local dev preview): use TLS sockets bridged to web streams.
+    const tls = await import(/* @vite-ignore */ "node:tls");
+    const { Duplex } = await import(/* @vite-ignore */ "node:stream");
+    const socket = await new Promise<import("node:tls").TLSSocket>((resolve, reject) => {
+      const s = tls.connect({ host: hostname, port, servername: hostname }, () => resolve(s));
+      s.once("error", reject);
+    });
+    return Duplex.toWeb(socket) as unknown as WebSocketPair;
+  }
 }
+
 
 type SmtpConfig = {
   host: string;
