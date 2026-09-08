@@ -233,16 +233,26 @@ export function Contact() {
               {status === "sending" ? "Sending…" : "Send Message"}
             </button>
 
-            <p
-              aria-live="polite"
-              className={`min-h-5 text-xs ${status === "error" ? "text-destructive" : "text-hero-accent"}`}
-            >
-              {status === "sent"
-                ? "Thanks! Your message has been sent — I'll reply soon."
-                : status === "error"
-                  ? "Your email app has been opened with this message ready to send."
-                  : ""}
-            </p>
+            <div aria-live="polite" className="min-h-6">
+              {status === "sent" ? (
+                <p className="flex items-start gap-2 rounded-2xl border border-hero-accent/40 bg-hero-accent/10 px-4 py-3 text-xs font-medium text-hero-accent">
+                  <CheckCircle2 className="mt-px size-4 shrink-0" />
+                  <span>
+                    Message sent successfully! Thanks for reaching out — I'll reply to your email
+                    within 1–2 days.
+                  </span>
+                </p>
+              ) : status === "error" ? (
+                <p className="flex items-start gap-2 rounded-2xl border border-destructive/40 bg-destructive/10 px-4 py-3 text-xs font-medium text-destructive">
+                  <AlertCircle className="mt-px size-4 shrink-0" />
+                  <span>
+                    Message couldn't be sent right now. Your email app has been opened with the
+                    message ready, or write to samikshazelkar1999@gmail.com directly.
+                  </span>
+                </p>
+              ) : null}
+            </div>
+
           </form>
         </Reveal>
       </div>
