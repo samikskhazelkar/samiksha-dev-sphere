@@ -24,7 +24,6 @@ const SOCIALS = [
 export function Contact() {
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
-  const [errorDetail, setErrorDetail] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -65,10 +64,6 @@ export function Contact() {
       form.reset();
     } catch (err) {
       console.error("EmailJS send failed", err);
-      const detail =
-        typeof err === "object" && err !== null && "text" in err
-          ? String((err as { text?: unknown }).text ?? "")
-          : "";
 
       // Fallback 1: send through the server-side SMTP mailer.
       try {
@@ -83,7 +78,6 @@ export function Contact() {
           }),
         });
         if (res.ok) {
-          setErrorDetail("");
           setStatus("sent");
           form.reset();
           return;
@@ -93,7 +87,6 @@ export function Contact() {
         console.error("SMTP fallback request failed", smtpErr);
       }
 
-      setErrorDetail(detail);
       setStatus("error");
       // Fallback 2: open the visitor's mail app with the message prefilled
       const body = `Name: ${get("name")}\nEmail: ${get("email")}\n\n${get("message")}`;
@@ -244,7 +237,7 @@ export function Contact() {
               {status === "sent"
                 ? "Thanks! Your message has been sent — I'll reply soon."
                 : status === "error"
-                  ? `Couldn't send${errorDetail ? ` (${errorDetail})` : ""}. Please email samikshazelkar1999@gmail.com directly.`
+                  ? "Your email app has been opened with this message ready to send."
                   : ""}
             </p>
           </form>
