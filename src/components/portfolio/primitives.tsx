@@ -60,6 +60,7 @@ export function Section({
   subtitle,
   children,
   className,
+  boxedHeader = false,
 }: {
   id: string;
   eyebrow: string;
@@ -67,16 +68,24 @@ export function Section({
   subtitle?: string;
   children: ReactNode;
   className?: string;
+  boxedHeader?: boolean;
 }) {
   return (
     <section
       id={id}
       className={cn("relative mx-auto w-full max-w-6xl scroll-mt-24 px-5 py-24 sm:px-8", className)}
     >
-      <Reveal className="mb-12 max-w-2xl">
+      <Reveal
+        className={cn(
+          "mb-12",
+          boxedHeader ? "glass rounded-3xl p-7 sm:p-9" : "max-w-2xl",
+        )}
+      >
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-hero-accent">{eyebrow}</p>
-        <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">{title}</h2>
-        {subtitle ? <p className="mt-4 text-base leading-relaxed text-muted-foreground">{subtitle}</p> : null}
+        <h2 className="mt-3 max-w-3xl text-3xl font-semibold sm:text-4xl">{title}</h2>
+        {subtitle ? (
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground">{subtitle}</p>
+        ) : null}
       </Reveal>
       {children}
     </section>
