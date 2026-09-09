@@ -1,6 +1,6 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
-import { ArrowUp, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { AlertCircle, ArrowUp, CheckCircle2, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { Reveal, Section } from "./primitives";
 
 type Errors = Partial<Record<"name" | "email" | "subject" | "message", string>>;

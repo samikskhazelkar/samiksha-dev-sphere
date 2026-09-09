@@ -40,6 +40,7 @@ export function About() {
   return (
     <Section
       id="about"
+      boxedHeader
       eyebrow="About"
       title="Technology and data, applied to real problems"
       subtitle="I'm passionate about using technology and data to solve practical problems — building dependable backend services and data-driven solutions that improve the efficiency, accuracy, and usefulness of internal data-processing systems."
