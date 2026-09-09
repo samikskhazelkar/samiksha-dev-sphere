@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
 import profile from "@/assets/samiksha.png.asset.json";
+import resume from "@/assets/samiksha_zelkar.pdf.asset.json";
 
 const ROLES = [
   "Software Developer",
@@ -97,8 +98,10 @@ export function Hero() {
                 Get Started <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </a>
               <a
-                href="/resume.txt"
-                download="Samiksha-Zelkar-Resume.txt"
+                href={resume.url}
+                download="Samiksha-Zelkar-Resume.pdf"
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-hero-on-panel/35 px-6 py-3.5 text-sm font-medium transition-colors hover:bg-hero-on-panel/10"
               >
                 <Download className="size-4" /> Download CV
