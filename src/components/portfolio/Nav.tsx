@@ -7,7 +7,7 @@ const LINKS = [
   ["About", "about"],
   ["Skills", "skills"],
   ["Experience", "experience"],
-  ["Projects", "projects"],
+  ["Work", "projects"],
   ["Services", "services"],
   ["Education", "education"],
   ["Contact", "contact"],
@@ -33,32 +33,39 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled ? "glass border-b" : "border-b border-transparent",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+        scrolled ? "border-b border-border bg-background/70 backdrop-blur-xl" : "border-b border-transparent",
       )}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a href="#home" className="font-display text-sm font-semibold tracking-tight">
-          samiksha<span className="text-hero-accent">.</span>dev
+        <a href="#home" className="font-display text-lg tracking-tight">
+          Samiksha<span className="text-hero-accent">.</span>
         </a>
 
-        <ul className="hidden items-center gap-1 lg:flex">
-          {LINKS.map(([label, id]) => (
+        <ul className="hidden items-center gap-7 lg:flex">
+          {LINKS.slice(1).map(([label, id]) => (
             <li key={id}>
               <a
                 href={`#${id}`}
                 className={cn(
-                  "relative rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground",
+                  "relative font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-foreground",
                   active === id && "text-foreground",
                 )}
               >
                 {label}
                 <span
                   className={cn(
-                    "absolute inset-x-3 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full bg-hero-accent transition-transform duration-300",
+                    "absolute -bottom-1.5 left-0 h-px w-full origin-left scale-x-0 bg-hero-accent transition-transform duration-500",
                     active === id && "scale-x-100",
                   )}
                 />
@@ -69,9 +76,9 @@ export function Nav() {
 
         <a
           href="#contact"
-          className="hidden rounded-full bg-hero-accent px-5 py-2 text-sm font-semibold text-hero-accent-foreground transition-transform hover:-translate-y-0.5 lg:inline-block"
+          className="hidden border-b border-hero-accent pb-1 font-mono text-[11px] uppercase tracking-[0.22em] text-hero-accent lg:inline-block"
         >
-          Hire me
+          Let&apos;s work together
         </a>
 
         <button
@@ -79,36 +86,35 @@ export function Nav() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="rounded-lg border border-border p-2 text-foreground lg:hidden"
+          className="relative z-50 text-foreground lg:hidden"
         >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          {open ? <X className="size-6" /> : <Menu className="size-6" />}
         </button>
       </nav>
 
       {open ? (
-        <div className="glass border-t lg:hidden">
-          <ul className="mx-auto flex max-w-6xl flex-col px-5 py-3 sm:px-8">
-            {LINKS.map(([label, id]) => (
-              <li key={id}>
+        <div className="fixed inset-0 z-40 flex flex-col justify-center bg-background px-8 lg:hidden">
+          <ul className="flex flex-col gap-1">
+            {LINKS.map(([label, id], i) => (
+              <li key={id} className="animate-fade-in" style={{ animationDelay: `${i * 45}ms` }}>
                 <a
                   href={`#${id}`}
                   onClick={() => setOpen(false)}
-                  className="block py-3 text-base text-muted-foreground transition-colors hover:text-foreground"
+                  className="flex items-baseline gap-4 py-2 font-display text-4xl text-foreground"
                 >
+                  <span className="font-mono text-[10px] text-hero-accent">0{i + 1}</span>
                   {label}
                 </a>
               </li>
             ))}
-            <li className="pb-2 pt-3">
-              <a
-                href="#contact"
-                onClick={() => setOpen(false)}
-                className="block rounded-full bg-hero-accent px-5 py-3 text-center text-sm font-semibold text-hero-accent-foreground"
-              >
-                Hire me
-              </a>
-            </li>
           </ul>
+          <a
+            href="#contact"
+            onClick={() => setOpen(false)}
+            className="mt-10 inline-block self-start border-b border-hero-accent pb-1 font-mono text-xs uppercase tracking-[0.22em] text-hero-accent"
+          >
+            Let&apos;s work together
+          </a>
         </div>
       ) : null}
     </header>
