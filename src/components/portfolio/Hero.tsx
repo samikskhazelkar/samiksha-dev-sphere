@@ -1,168 +1,158 @@
-import { useEffect, useState } from "react";
-import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowDown, ArrowUpRight, Download, Github, Linkedin } from "lucide-react";
 import profile from "@/assets/samiksha.png.asset.json";
 import resume from "@/assets/samiksha_zelkar.pdf.asset.json";
 
-const ROLES = [
-  "Software Developer",
-  "Backend Developer",
-  ".NET Developer",
-  "Data Science & ML Enthusiast",
-];
-
-function useTyping() {
-  const [text, setText] = useState("");
-  const [i, setI] = useState(0);
-  const [deleting, setDeleting] = useState(false);
+/** 0 → 1 progress across the hero's scroll distance. */
+function useScrollProgress(ref: React.RefObject<HTMLElement | null>) {
+  const [p, setP] = useState(0);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setText(ROLES[0]!);
-      return;
-    }
-    const full = ROLES[i % ROLES.length]!;
-    const done = !deleting && text === full;
-    const empty = deleting && text === "";
-    const delay = done ? 1600 : empty ? 200 : deleting ? 35 : 70;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const el = ref.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const distance = Math.max(1, rect.height - window.innerHeight);
+      setP(Math.min(1, Math.max(0, -rect.top / distance)));
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [ref]);
 
-    const t = setTimeout(() => {
-      if (done) return setDeleting(true);
-      if (empty) {
-        setDeleting(false);
-        setI((v) => v + 1);
-        return;
-      }
-      setText(deleting ? full.slice(0, text.length - 1) : full.slice(0, text.length + 1));
-    }, delay);
-    return () => clearTimeout(t);
-  }, [text, deleting, i]);
-
-  return text;
+  return p;
 }
 
 export function Hero() {
-  const typed = useTyping();
+  const ref = useRef<HTMLElement | null>(null);
+  const p = useScrollProgress(ref);
+
+  const scale = 1 + p * 0.06;
+  const lift = p * -60;
+  const textFade = Math.max(0, 1 - p * 2.2);
 
   return (
-    <section id="home" className="mx-auto max-w-6xl scroll-mt-24 px-4 pb-16 pt-24 sm:px-8">
-      <div className="hero-panel animate-fade-in relative overflow-hidden rounded-[2.5rem] px-6 py-12 text-hero-on-panel shadow-[0_40px_120px_-40px_oklch(0.48_0.22_285/0.7)] sm:px-12 sm:py-16">
-        {/* decorative accents */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute right-[18%] top-16 hidden size-72 rounded-full bg-hero-accent/90 blur-[2px] lg:block lg:size-80" />
-          <div className="absolute right-[6%] top-1/2 hidden size-28 rounded-full bg-hero-accent/80 lg:block" />
-          <div className="absolute -left-16 -top-16 size-64 rounded-full border border-hero-on-panel/15" />
-          <div className="absolute bottom-8 left-10 size-40 rounded-full border border-hero-on-panel/10" />
-          <div className="absolute left-6 top-24 hidden flex-col gap-3 sm:left-8 lg:flex">
-            {[0, 1, 2, 3, 4].map((d) => (
-              <span key={d} className="size-1.5 rounded-full bg-hero-on-panel/60" />
-            ))}
+    <section id="home" ref={ref} className="relative h-[220vh] scroll-mt-0">
+      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+        {/* portrait */}
+        <div className="pointer-events-none absolute inset-0 flex items-end justify-center">
+          <div
+            className="relative h-[78vh] w-auto will-change-transform"
+            style={{ transform: `translate3d(0, ${lift}px, 0) scale(${scale})` }}
+          >
+            <img
+              src={profile.url}
+              alt="Portrait of Samiksha Sunil Zelkar"
+              width={423}
+              height={800}
+              className="h-full w-auto object-contain object-bottom"
+              style={{
+                maskImage: "linear-gradient(to bottom, black 72%, transparent 99%)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 72%, transparent 99%)",
+              }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: `oklch(0.14 0.006 285 / ${p * 0.55})` }}
+            />
           </div>
         </div>
 
-        <div className="relative grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="pl-4 sm:pl-8">
-            <span className="inline-flex items-center gap-2 rounded-full bg-hero-on-panel/15 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.22em]">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-hero-accent opacity-80" />
-                <span className="relative inline-flex size-2 rounded-full bg-hero-accent" />
-              </span>
-              Open to opportunities · Nagpur, India
-            </span>
+        {/* halo */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 size-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-hero-accent/10 blur-[150px]"
+        />
 
-            <h1 className="mt-6 text-4xl font-semibold leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
-              Hello, I&apos;m
+        {/* typography around the subject */}
+        <div
+          className="relative mx-auto flex h-full w-full max-w-6xl flex-col justify-between px-5 pb-24 pt-28 sm:px-8"
+          style={{ opacity: textFade }}
+        >
+          <div className="animate-fade-in max-w-md">
+            <p className="font-mono text-[11px] uppercase tracking-[0.42em] text-hero-accent">
+              Backend &amp; Data Developer
+            </p>
+            <h1 className="mt-5 text-4xl leading-[1.04] sm:text-6xl">
+              Building software
               <br />
-              Samiksha Zelkar
-              <br />
-              <span className="text-hero-accent">Backend Developer</span>
+              people rely on.
             </h1>
-
-            <p className="mt-5 font-mono text-sm text-hero-on-panel/80 sm:text-base" aria-label="Roles">
-              <span aria-hidden>
-                {typed}
-                <span className="caret ml-0.5 text-hero-accent">_</span>
-              </span>
-              <span className="sr-only">{ROLES.join(", ")}</span>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              Samiksha Sunil Zelkar — backend developer working in C#, ASP.NET Core and PostgreSQL, with applied
+              machine learning in Python.
             </p>
+          </div>
 
-            <p className="mt-4 max-w-lg text-sm leading-relaxed text-hero-on-panel/75 sm:text-base">
-              I build RESTful APIs with C#, ASP.NET Core and PostgreSQL, and explore data science and machine learning
-              with Python — turning backend logic and data into products that work.
-            </p>
-
-            <div className="mt-9 flex flex-wrap items-center gap-3">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div className="flex flex-wrap items-center gap-3">
               <a
                 href="#projects"
-                className="group inline-flex items-center gap-2 rounded-full bg-hero-accent px-7 py-3.5 text-sm font-semibold text-hero-accent-foreground transition-transform hover:-translate-y-0.5"
+                data-cursor="View"
+                className="group inline-flex items-center gap-2 border-b border-hero-accent pb-1 text-sm uppercase tracking-[0.18em] text-hero-accent"
               >
-                Get Started <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                View my work
+                <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 border-b border-border pb-1 text-sm uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+              >
+                Let&apos;s work together
+              </a>
+            </div>
+
+            <div className="flex items-center gap-5 text-muted-foreground">
               <a
                 href={resume.url}
                 download="Samiksha-Zelkar-Resume.pdf"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-hero-on-panel/35 px-6 py-3.5 text-sm font-medium transition-colors hover:bg-hero-on-panel/10"
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] transition-colors hover:text-foreground"
               >
-                <Download className="size-4" /> Download CV
+                <Download className="size-4" /> CV
               </a>
-              <div className="flex items-center gap-2">
-                {[
-                  { href: "https://github.com/samikskhazelkar", label: "GitHub", Icon: Github },
-                  {
-                    href: "https://www.linkedin.com/in/samikshazelkar/",
-                    label: "LinkedIn",
-                    Icon: Linkedin,
-                  },
-                  { href: "#contact", label: "Contact", Icon: Mail },
-                ].map(({ href, label, Icon }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    {...(href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
-                    aria-label={label}
-                    className="flex size-11 items-center justify-center rounded-full bg-hero-on-panel/15 transition-colors hover:bg-hero-on-panel/25"
-                  >
-                    <Icon className="size-4" />
-                  </a>
-                ))}
-              </div>
+              <a
+                href="https://github.com/samikskhazelkar"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+                className="transition-colors hover:text-foreground"
+              >
+                <Github className="size-4" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/samikshazelkar/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+                className="transition-colors hover:text-foreground"
+              >
+                <Linkedin className="size-4" />
+              </a>
             </div>
           </div>
+        </div>
 
-          <div className="relative mx-auto w-full max-w-sm">
-            <div className="relative flex items-center justify-center">
-              {/* yellow halo rings */}
-              <div className="absolute inset-0 rounded-full bg-hero-accent/20 blur-2xl" />
-              <div className="absolute -inset-3 rounded-full border-2 border-hero-accent/40" />
-              <div className="absolute -inset-6 rounded-full border border-dashed border-hero-on-panel/20" />
-
-              {/* circular mask portrait */}
-              <div className="relative z-10 aspect-square w-full max-w-[20rem] overflow-hidden rounded-full border-4 border-hero-accent bg-hero-panel shadow-2xl">
-                <img
-                  src={profile.url}
-                  alt="Portrait of Samiksha Sunil Zelkar"
-                  width={423}
-                  height={800}
-                  className="h-full w-full object-cover object-top"
-                />
-              </div>
-
-              <div className="absolute left-0 top-4 z-20 flex items-center gap-3 rounded-2xl bg-background/95 px-4 py-3 shadow-lg sm:top-8 lg:-left-8">
-                <span className="text-2xl font-semibold text-hero-panel">6+</span>
-                <span className="text-[11px] font-medium leading-tight text-muted-foreground">
-                  Months
-                  <br />
-                  Experience
-                </span>
-              </div>
-
-              <div className="absolute bottom-6 right-0 z-20 rounded-2xl bg-background/95 px-4 py-3 shadow-lg lg:-right-6">
-                <p className="text-sm font-semibold text-foreground">APIs &amp; Data</p>
-                <p className="font-mono text-[11px] text-muted-foreground">C# · .NET · Python</p>
-              </div>
-            </div>
-          </div>
+        {/* scroll indicator */}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-6 flex flex-col items-center gap-2"
+          style={{ opacity: Math.max(0, 1 - p * 5) }}
+        >
+          <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-muted-foreground">
+            Scroll to explore
+          </span>
+          <ArrowDown className="scroll-hint size-4 text-hero-accent" />
         </div>
       </div>
     </section>
