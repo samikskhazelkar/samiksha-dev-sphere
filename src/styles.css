@@ -201,8 +201,8 @@
   100% { transform: translate3d(0, -120px, 0); }
 }
 
-@media (pointer: fine) {
-  @utility cursor-none-fine {
+@utility cursor-none-fine {
+  @media (pointer: fine) {
     cursor: none;
   }
 }
