@@ -128,7 +128,17 @@ export function Contact() {
             ))}
           </ul>
 
-          <div className="mt-7 flex gap-3">
+          <a
+            href={LINKEDIN_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-7 inline-flex items-center gap-2 rounded-full bg-hero-accent px-5 py-3 text-sm font-semibold text-hero-accent-foreground transition-transform hover:-translate-y-0.5"
+          >
+            <Linkedin className="size-4" />
+            Connect on LinkedIn
+          </a>
+
+          <div className="mt-4 flex gap-3">
             {SOCIALS.map(({ icon: Icon, label, href }) => (
               <a
                 key={label}
@@ -142,6 +152,7 @@ export function Contact() {
               </a>
             ))}
           </div>
+
         </Reveal>
 
         <Reveal delay={120} className="glass rounded-3xl p-7">
