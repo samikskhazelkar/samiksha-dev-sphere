@@ -288,7 +288,17 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <a
+            href={LINKEDIN_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-hero-accent/50 px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-hero-accent transition-colors hover:bg-hero-accent hover:text-hero-accent-foreground"
+          >
+            <Linkedin className="size-4" />
+            Connect on LinkedIn
+          </a>
+
           {SOCIALS.map(({ icon: Icon, label, href }) => (
             <a
               key={label}
