@@ -16,10 +16,13 @@ const DETAILS = [
   { icon: MapPin, label: "Nagpur, Maharashtra", href: null },
 ];
 
+export const LINKEDIN_URL = "https://www.linkedin.com/in/samikshazelkar/";
+
 const SOCIALS = [
   { icon: Github, label: "GitHub", href: "https://github.com/samikskhazelkar" },
-  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/samikshazelkar/" },
+  { icon: Linkedin, label: "LinkedIn", href: LINKEDIN_URL },
 ];
+
 
 export function Contact() {
   const [errors, setErrors] = useState<Errors>({});
