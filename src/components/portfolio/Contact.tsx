@@ -16,10 +16,13 @@ const DETAILS = [
   { icon: MapPin, label: "Nagpur, Maharashtra", href: null },
 ];
 
+export const LINKEDIN_URL = "https://www.linkedin.com/in/samikshazelkar/";
+
 const SOCIALS = [
   { icon: Github, label: "GitHub", href: "https://github.com/samikskhazelkar" },
-  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/samikshazelkar/" },
+  { icon: Linkedin, label: "LinkedIn", href: LINKEDIN_URL },
 ];
+
 
 export function Contact() {
   const [errors, setErrors] = useState<Errors>({});
@@ -128,7 +131,17 @@ export function Contact() {
             ))}
           </ul>
 
-          <div className="mt-7 flex gap-3">
+          <a
+            href={LINKEDIN_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-7 inline-flex items-center gap-2 rounded-full bg-hero-accent px-5 py-3 text-sm font-semibold text-hero-accent-foreground transition-transform hover:-translate-y-0.5"
+          >
+            <Linkedin className="size-4" />
+            Connect on LinkedIn
+          </a>
+
+          <div className="mt-4 flex gap-3">
             {SOCIALS.map(({ icon: Icon, label, href }) => (
               <a
                 key={label}
@@ -142,6 +155,7 @@ export function Contact() {
               </a>
             ))}
           </div>
+
         </Reveal>
 
         <Reveal delay={120} className="glass rounded-3xl p-7">
@@ -274,7 +288,17 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <a
+            href={LINKEDIN_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-hero-accent/50 px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-hero-accent transition-colors hover:bg-hero-accent hover:text-hero-accent-foreground"
+          >
+            <Linkedin className="size-4" />
+            Connect on LinkedIn
+          </a>
+
           {SOCIALS.map(({ icon: Icon, label, href }) => (
             <a
               key={label}

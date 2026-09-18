@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Linkedin, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
@@ -75,11 +75,15 @@ export function Nav() {
         </ul>
 
         <a
-          href="#contact"
-          className="hidden border-b border-hero-accent pb-1 font-mono text-[11px] uppercase tracking-[0.22em] text-hero-accent lg:inline-block"
+          href="https://www.linkedin.com/in/samikshazelkar/"
+          target="_blank"
+          rel="noreferrer"
+          className="hidden items-center gap-2 rounded-full bg-hero-accent px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-hero-accent-foreground transition-transform hover:-translate-y-0.5 lg:inline-flex"
         >
-          Let&apos;s work together
+          <Linkedin className="size-3.5" />
+          Connect on LinkedIn
         </a>
+
 
         <button
           type="button"
@@ -114,6 +118,16 @@ export function Nav() {
             className="mt-10 inline-block self-start border-b border-hero-accent pb-1 font-mono text-xs uppercase tracking-[0.22em] text-hero-accent"
           >
             Let&apos;s work together
+          </a>
+          <a
+            href="https://www.linkedin.com/in/samikshazelkar/"
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => setOpen(false)}
+            className="mt-6 inline-flex items-center gap-2 self-start rounded-full bg-hero-accent px-5 py-3 font-mono text-xs uppercase tracking-[0.18em] text-hero-accent-foreground"
+          >
+            <Linkedin className="size-4" />
+            Connect on LinkedIn
           </a>
         </div>
       ) : null}
