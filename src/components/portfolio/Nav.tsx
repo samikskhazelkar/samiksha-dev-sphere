@@ -128,6 +128,7 @@ export function Nav() {
           >
             <Linkedin className="size-4" />
             Connect on LinkedIn
+          </a>
         </div>
       ) : null}
     </header>
