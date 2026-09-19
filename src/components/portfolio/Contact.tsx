@@ -296,6 +296,7 @@ export function Footer() {
             href={LINKEDIN_URL}
             target="_blank"
             rel="noreferrer"
+            onClick={openExternal(LINKEDIN_URL)}
             className="inline-flex items-center gap-2 rounded-full border border-hero-accent/50 px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-hero-accent transition-colors hover:bg-hero-accent hover:text-hero-accent-foreground"
           >
             <Linkedin className="size-4" />
