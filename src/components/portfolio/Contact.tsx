@@ -309,6 +309,7 @@ export function Footer() {
               href={href}
               target="_blank"
               rel="noreferrer"
+              onClick={openExternal(href)}
               aria-label={label}
               className="grid size-10 place-items-center rounded-xl border border-border text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground"
             >
