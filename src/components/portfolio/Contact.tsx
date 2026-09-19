@@ -136,6 +136,7 @@ export function Contact() {
             href={LINKEDIN_URL}
             target="_blank"
             rel="noreferrer"
+            onClick={openExternal(LINKEDIN_URL)}
             className="mt-7 inline-flex items-center gap-2 rounded-full bg-hero-accent px-5 py-3 text-sm font-semibold text-hero-accent-foreground transition-transform hover:-translate-y-0.5"
           >
             <Linkedin className="size-4" />
