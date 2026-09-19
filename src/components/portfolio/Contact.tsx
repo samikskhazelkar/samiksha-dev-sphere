@@ -2,6 +2,7 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { AlertCircle, ArrowUp, CheckCircle2, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { Reveal, Section } from "./primitives";
+import { openExternal } from "@/lib/external-link";
 
 type Errors = Partial<Record<"name" | "email" | "subject" | "message", string>>;
 type Status = "idle" | "sending" | "sent" | "error";
