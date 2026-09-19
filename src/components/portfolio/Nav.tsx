@@ -125,7 +125,10 @@ export function Nav() {
             href="https://www.linkedin.com/in/samikshazelkar/"
             target="_blank"
             rel="noreferrer"
-            onClick={() => setOpen(false)}
+            onClick={(e) => {
+              setOpen(false);
+              openExternal("https://www.linkedin.com/in/samikshazelkar/")(e);
+            }}
             className="mt-6 inline-flex items-center gap-2 self-start rounded-full bg-hero-accent px-5 py-3 font-mono text-xs uppercase tracking-[0.18em] text-hero-accent-foreground"
           >
             <Linkedin className="size-4" />
