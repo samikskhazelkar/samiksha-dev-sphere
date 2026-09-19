@@ -126,6 +126,7 @@ export function Hero() {
                 href="https://github.com/samikskhazelkar"
                 target="_blank"
                 rel="noreferrer"
+                onClick={openExternal("https://github.com/samikskhazelkar")}
                 aria-label="GitHub"
                 className="transition-colors hover:text-foreground"
               >
@@ -135,6 +136,7 @@ export function Hero() {
                 href="https://www.linkedin.com/in/samikshazelkar/"
                 target="_blank"
                 rel="noreferrer"
+                onClick={openExternal("https://www.linkedin.com/in/samikshazelkar/")}
                 aria-label="LinkedIn"
                 className="transition-colors hover:text-foreground"
               >
