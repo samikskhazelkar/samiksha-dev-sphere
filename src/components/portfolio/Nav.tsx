@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Linkedin, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { openExternal } from "@/lib/external-link";
 
 const LINKS = [
   ["Home", "home"],
