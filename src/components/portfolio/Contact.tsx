@@ -150,6 +150,7 @@ export function Contact() {
                 href={href}
                 target="_blank"
                 rel="noreferrer"
+                onClick={openExternal(href)}
                 aria-label={label}
                 className="grid size-11 place-items-center rounded-2xl border border-border text-muted-foreground transition-all hover:border-primary/60 hover:text-foreground hover:shadow-[var(--glow-primary)]"
               >
