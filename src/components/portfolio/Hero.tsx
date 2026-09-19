@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowDown, ArrowUpRight, Download, Github, Linkedin } from "lucide-react";
 import profile from "@/assets/samiksha.png.asset.json";
 import resume from "@/assets/samiksha_zelkar.pdf.asset.json";
+import { openExternal } from "@/lib/external-link";
 
 /** 0 → 1 progress across the hero's scroll distance. */
 function useScrollProgress(ref: React.RefObject<HTMLElement | null>) {
