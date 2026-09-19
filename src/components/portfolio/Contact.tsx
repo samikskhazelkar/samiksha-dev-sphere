@@ -2,6 +2,7 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { AlertCircle, ArrowUp, CheckCircle2, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { Reveal, Section } from "./primitives";
+import { openExternal } from "@/lib/external-link";
 
 type Errors = Partial<Record<"name" | "email" | "subject" | "message", string>>;
 type Status = "idle" | "sending" | "sent" | "error";
@@ -135,6 +136,7 @@ export function Contact() {
             href={LINKEDIN_URL}
             target="_blank"
             rel="noreferrer"
+            onClick={openExternal(LINKEDIN_URL)}
             className="mt-7 inline-flex items-center gap-2 rounded-full bg-hero-accent px-5 py-3 text-sm font-semibold text-hero-accent-foreground transition-transform hover:-translate-y-0.5"
           >
             <Linkedin className="size-4" />
@@ -148,6 +150,7 @@ export function Contact() {
                 href={href}
                 target="_blank"
                 rel="noreferrer"
+                onClick={openExternal(href)}
                 aria-label={label}
                 className="grid size-11 place-items-center rounded-2xl border border-border text-muted-foreground transition-all hover:border-primary/60 hover:text-foreground hover:shadow-[var(--glow-primary)]"
               >
@@ -293,6 +296,7 @@ export function Footer() {
             href={LINKEDIN_URL}
             target="_blank"
             rel="noreferrer"
+            onClick={openExternal(LINKEDIN_URL)}
             className="inline-flex items-center gap-2 rounded-full border border-hero-accent/50 px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-hero-accent transition-colors hover:bg-hero-accent hover:text-hero-accent-foreground"
           >
             <Linkedin className="size-4" />
@@ -305,6 +309,7 @@ export function Footer() {
               href={href}
               target="_blank"
               rel="noreferrer"
+              onClick={openExternal(href)}
               aria-label={label}
               className="grid size-10 place-items-center rounded-xl border border-border text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground"
             >
