@@ -79,6 +79,7 @@ export function Nav() {
           href="https://www.linkedin.com/in/samikshazelkar/"
           target="_blank"
           rel="noreferrer"
+          onClick={openExternal("https://www.linkedin.com/in/samikshazelkar/")}
           className="hidden items-center gap-2 rounded-full bg-hero-accent px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-hero-accent-foreground transition-transform hover:-translate-y-0.5 lg:inline-flex"
         >
           <Linkedin className="size-3.5" />
